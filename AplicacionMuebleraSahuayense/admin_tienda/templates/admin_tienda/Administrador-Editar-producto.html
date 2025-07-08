@@ -1,0 +1,103 @@
+{% load static %}
+{% load filtros_extras %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Editar Nuevo Producto</title>
+  <link rel="icon" href="https://res.cloudinary.com/dacrpsl5p/image/upload/v1745430696/Logo-Negro-B_c6wznv.png"
+    type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'Css/Principal.css' %}">
+  <link rel="stylesheet" href="{% static 'Css/Admin-editar-producto.css' %}">
+  <style>
+    
+  </style>
+</head>
+
+<body>
+  {% include 'includes/spinner.html' %}
+  <header>
+    <div class="breadcrumb-container">
+      <div class="breadcrumb">
+        <a class="breadcrumb-link" href="{% url 'administrador' %}#section-productos">
+          <i class="fas fa-home"></i> Home
+        </a>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-active">
+          <i class="fas fa-edit"></i> Editar Productos
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <section class="form-card">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <label>
+        <input type="checkbox" name="stateFurniture" {% if producto.stateFurniture %}checked{% endif %}>
+        Producto activo
+      </label>
+      <label>Nombre:</label>
+      <input type="text" name="nameFurniture" value="{{ producto.nameFurniture }}" required>
+
+      <label>Descripción:</label>
+      <textarea name="descriptionFurniture">{{ producto.descriptionFurniture }}</textarea>
+
+      <label>Precio:</label>
+      <input type="number" step="0.01" name="priceFurniture" value="{{ producto.priceFurniture }}" required>
+
+      <label>Descuento (%):</label>
+      <input type="number" name="porcentajeDescuento" value="{{ producto.porcentajeDescuento }}" oninput="validarDescuento(this)"  >
+
+
+
+      <label>Imágenes actuales:</label>
+      {% if producto.imageFurniture %}
+      <div class="image-preview">
+        {% for url in producto.imageFurniture|cut:" "|split:"," %}
+        {% if url %}
+        <div>
+          <img src="{{ url }}">
+          <button type="button" onclick="eliminarImagen('{{ url }}')">X</button>
+          <input type="hidden" name="imagenes_mostradas" value="{{ url }}">
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+      <div id="imagenes_a_eliminar_container"></div>
+      {% else %}
+      <em>No hay imágenes subidas</em>
+      {% endif %}
+
+      <label>Nueva imagen (opcional):</label>
+      <input type="file" name="imageFurniture" multiple>
+
+
+
+      <label>Categorías:</label>
+      <div class="checkbox-categorias">
+  {% for categoria in categorias %}
+    <label class="categoria-checkbox">
+      <input type="checkbox" name="categoryID[]" value="{{ categoria.id }}" {% if categoria in producto.categoryID.all %}checked{% endif %}>
+
+      {{ categoria.nameCategory }}
+    </label>
+  {% endfor %}
+</div>
+
+      <div class="button-guardar-editar-productos">
+        <button type="submit" onclick="mostrarSpinner()">
+          <i class="fas fa-save"></i> Guardar Cambios
+        </button>
+      </div>
+    </form>
+  </section>
+   {% include 'includes/toast.html' %}
+    <script src="{% static 'js/Admin-mostrarToast.js' %}"></script>
+   <script src="{% static 'js/Admin-editar-productos.js' %}"></script>
+</body>
+</html>

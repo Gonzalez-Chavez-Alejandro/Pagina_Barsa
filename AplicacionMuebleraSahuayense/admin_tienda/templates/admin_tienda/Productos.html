@@ -1,0 +1,126 @@
+{% load static %}
+<script src="{% static 'js/header.js' %}"></script>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="icon" href="https://res.cloudinary.com/dacrpsl5p/image/upload/v1745430696/Logo-Negro-B_c6wznv.png"
+    type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <title>Producto</title>
+    <link rel="stylesheet" href="{% static 'Css/Principal.css' %}">
+      <link rel="stylesheet" href="{% static 'Css/Header.css' %}">
+    <link rel="stylesheet" href="{% static 'Css/Carrito.css' %}">
+    <link rel="stylesheet" href="{% static 'Css/Home.css' %}">
+    <link rel="stylesheet" href="{% static 'Css/Productos.css' %}">
+    <link rel="stylesheet" href="{% static 'Css/foother.css' %}">
+<style>
+   .busqueda-productos {
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+.input-con-icono {
+  position: relative;
+  width: 100%;
+}
+
+.input-con-icono i {
+  position: absolute;
+  top: 34%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: #888;
+  pointer-events: none;
+  font-size: 16px;
+  line-height: 1; /* para mejor alineación */
+}
+
+#buscador {
+  width: 100%;
+  padding: 10px 10px 10px 36px; /* espacio para el icono */
+  font-size: 16px;
+  border: 2px solid #000000;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+  height: 36px;  /* altura fija para mejor alineación */
+  line-height: 1.2;
+}
+
+#buscador:focus {
+  border-color: #384f68e3;
+  outline: none;
+  box-shadow: 0 0 5px #384f68e3;
+}
+
+</style>
+</head>
+
+<body>
+    {% include 'includes/spinner.html' %}
+    {% include 'includes/header.html' %}
+
+    <main>
+        {% block content %}
+        <!-- Aquí va el contenido específico de cada página -->
+        {% endblock %}
+    </main>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <h3>Categorías</h3>
+            <ul id="lista-categorias">
+                <li data-id="all" class="categoria-activa"></li>
+            </ul>
+        </aside>
+
+        <main class="contenido-principal">
+            <div class="busqueda-productos">
+            <label for="buscador" class="sr-only">Buscar productos</label>
+            <div class="input-con-icono">
+                <i class="fas fa-search"></i>
+                <input type="text" id="buscador" placeholder="Buscar productos..." autocomplete="off" />
+            </div>
+            </div>
+
+            <div id="contenedor-productos" class="contenedor-productos"></div>
+        </main>
+    </div>
+
+    <div id="overlay-detalle"></div>
+
+
+        {% include 'includes/carrito.html' %}
+        {% include 'includes/foother.html' %}
+        {% include 'includes/toast.html' %}
+        <script src="{% static 'js/Header.js' %}"></script>
+        <script src="{% static 'js/header.js' %}"></script>
+    <script src="{% static 'js/Admin-mostrarToast.js' %}"></script>
+    <script src="{% static 'js/variables.js' %}"></script>
+
+    <script>
+        const urlConfiguracionUsuario = "{% url 'configuracion_usuario' %}";
+    </script>
+    <script>
+
+        // Para mostrar el detalle del producto (por ejemplo, cuando haces clic en un producto)
+        function mostrarDetalleProducto() {
+            // Oculta el contenido principal
+            document.querySelector("main.contenido-principal").style.display = "none";
+
+            // Muestra la sección de detalle
+            document.getElementById("detalle-producto").classList.add("activo");
+        }
+    </script>
+    <script src="{% static 'js/Carrito.js' %}"></script>
+  
+    <script src="{% static 'js/Home-contenedor-productos.js' %}"></script>
+    
+    <script src="{% static 'js/Admin-Manda.js' %}"></script>
+</body>
+
+</html>

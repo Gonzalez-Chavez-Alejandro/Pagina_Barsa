@@ -1,0 +1,325 @@
+.contenedor-detalle {
+    max-width: 1100px;
+    margin: 40px auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #222;
+}
+
+.galeria {
+    flex: 1 1 315px;
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#imagen-grande {
+    width: 100%;
+    max-height: 520px;
+    object-fit: contain;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+#imagen-grande:hover {
+    transform: scale(1.02);
+}
+
+.miniaturas {
+    max-width: 100%;   /* para que no se salga del contenedor padre */
+    display: flex;
+    gap: 12px;
+    flex-wrap: nowrap;      /* evita salto de línea */
+    overflow-x: auto;       /* agrega scroll horizontal si es necesario */
+    justify-content: flex-start;
+    padding-bottom: 8px;
+    scroll-behavior: smooth;
+    box-sizing: border-box; /* para que padding no aumente el ancho total */
+}
+
+.miniaturas {
+    padding: 0.7rem 0.5;
+    margin-top: 1rem;
+    width: 320px;
+    overflow-x: auto;
+    display: flex;
+    gap: 12px;
+    flex-wrap: nowrap;
+    padding-bottom: 8px;
+}
+
+
+
+.miniaturas img {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: border-color 0.3s ease, transform 0.2s ease;
+}
+
+.miniaturas img:hover {
+    transform: scale(1.1);
+    border-color: #7c6d17b9;
+}
+
+.miniaturas img.activa {
+    border-color: #2a405ccb;
+    box-shadow: 0 0 10px #2a405ccb;
+}
+
+.info-producto {
+    flex: 1 1 450px;
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+}
+
+.info-producto h1 {
+    font-size: 2.6rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #111;
+}
+
+.info-producto p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #444;
+}
+
+.precios {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.precio-oferta {
+    color: #1a0849;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.precio-original {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 1.2rem;
+}
+
+.ahorro {
+    color: #2A9D8F;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+#detalle-ahorro {
+    margin-top: 0;
+    font-weight: 600;
+}
+
+.boton-compra {
+    background-color: white;
+    color: #2a344b;
+    border: 2px solid #2a344b;
+    padding: 14px 28px;
+    font-size: 1.1rem;
+    margin: 0 24%;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.boton-compra:hover {
+    font-size: 1.2rem;
+}
+
+.boton-compra:active {
+    top: 2px;
+    box-shadow: 0 2px 0 #3213a1;
+}
+
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .precio-oferta {
+        font-size: 1rem;
+    }
+
+    .boton-compra {
+        margin: 0;
+    }
+
+    .contenedor-detalle {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .galeria,
+    .info-producto {
+        min-width: 100%;
+    }
+
+    .boton-compra {
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+.zoom-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-height: 500px;
+    border: 1px solid #ddd;
+}
+
+#imagen-grande {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+#zoom-lens {
+    position: absolute;
+    border: 2px solid #0066cc;
+    width: 100px;
+    height: 100px;
+    background-color: rgba(255, 255, 255, 0.3);
+    pointer-events: none;
+    display: none;
+    /* Solo se muestra al hacer hover */
+}
+
+.modal-imagen {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+    text-align: center;
+}
+
+.modal-imagen img {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 80vh;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+}
+
+.cerrar-modal {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #ffffff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.cerrar-modal:hover {
+    color: #bbb;
+}
+
+.contenedor-categorias-similares {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.contenedor-categorias-similares h2 {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    color: #2a344b;
+    text-align: center;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.contenedor-categorias-similares h2::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: #2a344b;
+}
+
+.categorias-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.categoria-similar {
+    background: white;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s ease;
+}
+
+.categoria-similar:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.08);
+}
+
+.categoria-similar img {
+    width: 35px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+    margin-right: 15px;
+}
+
+.categoria-similar h4 {
+    font-size: 1.1rem;
+    color: #2a344b;
+    margin: 0;
+    text-align: center;
+    flex-grow: 1;
+}

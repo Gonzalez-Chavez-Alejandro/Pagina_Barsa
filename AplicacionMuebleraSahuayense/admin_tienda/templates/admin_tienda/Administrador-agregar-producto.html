@@ -1,0 +1,233 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <title>Agregar Nuevo Producto</title>
+    <link rel="icon" href="https://res.cloudinary.com/dacrpsl5p/image/upload/v1745430696/Logo-Negro-B_c6wznv.png" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="{% static 'Css/Principal.css' %}" />
+    <link rel="stylesheet" href="{% static 'Css/Modal-Agregar-Producto.css' %}" />
+</head>
+<body>
+     {% include 'includes/spinner.html' %}
+<header>
+    <div class="agregar-producto-breadcrumb-container">
+        <div class="agregar-producto-breadcrumb">
+            <a class="agregar-producto-breadcrumb-link" href="{% url 'administrador' %}">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <span class="agregar-producto-breadcrumb-separator">/</span>
+            <span class="agregar-producto-breadcrumb-active">
+                <i class="fas fa-edit"></i> Agregar Producto
+            </span>
+        </div>
+    </div>
+</header>
+
+<main>
+    <h2>Agregar Producto</h2>
+    <form id="form-agregar-producto" enctype="multipart/form-data" class="form-agregar-producto">
+
+        <label for="nameFurniture">Nombre:</label><br>
+        <input type="text" name="nameFurniture" id="nameFurniture" />
+        <span class="error-text" id="error-nameFurniture"></span>
+        <br />
+
+        <label for="descriptionFurniture">Descripción:</label><br>
+        <textarea name="descriptionFurniture" id="descriptionFurniture"></textarea>
+        <span class="error-text" id="error-descriptionFurniture"></span>
+        <br />
+
+        <label for="priceFurniture">Precio:</label><br>
+        <input type="number" step="0.01" name="priceFurniture" id="priceFurniture" />
+        <span class="error-text" id="error-priceFurniture"></span>
+        <br />
+
+        <label for="porcentajeDescuento">Porcentaje de descuento:</label><br>
+        <input type="number" name="porcentajeDescuento" id="porcentajeDescuento" min="0" max="100" value="0" oninput="validarDescuento(this)" />
+        <span class="error-text" id="error-porcentajeDescuento"></span>
+        <br />
+
+        <label>Categorías:</label><br>
+        <span class="error-text" id="error-categoryID"></span><br>
+        <div class="categorias-container">
+            {% for categoria in categorias %}
+            <label class="categoria-label">
+                <input type="checkbox" name="categoryID" value="{{ categoria.id }}" />
+                {{ categoria.nameCategory }}
+            </label>
+            {% endfor %}
+        </div>
+        <br />
+
+        <label for="imageFurniture">Imágenes (mínimo 1):</label><br>
+        <input type="file" name="imageFurniture" id="imageFurniture" multiple accept="image/*" />
+        <span class="error-text" id="error-imageFurniture"></span>
+        <br />
+
+        <div id="preview-images" style="display:flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;"></div>
+
+        <label for="stateFurniture">Activo:</label>
+        <input type="checkbox" name="stateFurniture" id="stateFurniture" />
+        <br /><br />
+
+        <button type="submit" class="btn-agregar">Agregar Producto</button>
+    </form>
+</main>
+
+<footer>
+    <div class="footer"></div>
+</footer>
+<script>
+      function validarDescuento(input) {
+    let valor = parseInt(input.value, 10);
+
+    if (isNaN(valor)) {
+      input.value = '';
+    } else if (valor < 0) {
+      input.value = 0;
+    } else if (valor > 100) {
+      input.value = 100;
+    }
+  }
+document.addEventListener('DOMContentLoaded', async () => {
+    const token = localStorage.getItem('access_token');
+    if (!token) {
+        window.location.href = '/login/';
+        return;
+    }
+
+    try {
+        const response = await fetch('/api/user-info/', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            // Token inválido o expirado
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('refresh_token');
+            window.location.href = '/login/';
+            return;
+        }
+
+        const userInfo = await response.json();
+
+        // Validación adicional si es necesario
+        if (!userInfo.is_superuser) {
+            alert('No tienes permisos para acceder a esta sección.');
+            window.location.href = '/';
+        }
+
+        // Puedes mostrar el nombre del usuario o continuar
+        console.log('Usuario autenticado:', userInfo.username);
+    } catch (error) {
+        console.error('Error validando sesión:', error);
+        window.location.href = '/login/';
+    }
+});
+</script>
+
+<script>
+    
+document.addEventListener('DOMContentLoaded', () => {
+    const token = localStorage.getItem('access_token');
+    if (!token) {
+        alert("No estás autenticado");
+        return;
+    }
+
+    const form = document.getElementById('form-agregar-producto');
+
+    form.addEventListener('submit', async (e) => {
+        
+        e.preventDefault();
+        mostrarSpinner();
+        // Limpiar errores anteriores
+        document.querySelectorAll('.error-text').forEach(el => el.textContent = '');
+        const descuento = document.getElementById('priceFurniture').value.trim()!="0"? document.getElementById('porcentajeDescuento').value.trim(): 0
+        console.log("descuento",descuento)
+        const formData = new FormData();
+        formData.append('nameFurniture', document.getElementById('nameFurniture').value.trim());
+        formData.append('descriptionFurniture', document.getElementById('descriptionFurniture').value.trim());
+        formData.append('priceFurniture', document.getElementById('priceFurniture').value.trim());
+        formData.append('porcentajeDescuento', descuento);
+        formData.append('stateFurniture', document.getElementById('stateFurniture').checked ? 'on' : 'off');
+
+        // Categorías - aquí se envían múltiples inputs con mismo nombre 'categoryID'
+        document.querySelectorAll('input[name="categoryID"]:checked').forEach(cb => {
+            formData.append('categoryID', cb.value);
+        });
+
+        // Imágenes
+        const files = document.getElementById('imageFurniture').files;
+        for (let i = 0; i < files.length; i++) {
+            formData.append('imageFurniture', files[i]);
+        }
+       
+        try {
+            const response = await fetch('/productos/api/vista_agregar_producto/', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                    // No poner 'Content-Type' para que fetch gestione el multipart/form-data
+                },
+                body: formData
+            });
+            
+            const result = await response.json();
+
+            if (!response.ok) {
+                if (result.errors) {
+                    for (const campo in result.errors) {
+                        const errorEl = document.getElementById(`error-${campo}`);
+                        if (errorEl) errorEl.textContent = result.errors[campo];
+                    }
+                } else {
+                    alert("Error al agregar producto.");
+                }
+            } else {
+              //  alert("Producto agregado correctamente");
+                window.location.href = "/productos/administrador_agregar_producto/";  // Cambia la URL a donde quieras redirigir
+            }
+        } catch (error) {
+            console.error("Error en la petición:", error);
+            alert("Error al procesar la solicitud.");
+        }finally {
+        ocultarSpinner(); 
+    }
+
+    });
+
+    // Preview imágenes
+    const inputImages = document.getElementById('imageFurniture');
+    const previewContainer = document.getElementById('preview-images');
+    inputImages.addEventListener('change', () => {
+        previewContainer.innerHTML = '';
+        const files = inputImages.files;
+        for (const file of files) {
+            if (!file.type.startsWith('image/')) continue;
+            const reader = new FileReader();
+            reader.onload = e => {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.style.width = '100px';
+                img.style.height = '100px';
+                img.style.objectFit = 'cover';
+                img.style.borderRadius = '5px';
+                img.style.boxShadow = '0 0 5px rgba(0,0,0,0.3)';
+                previewContainer.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+});
+</script>
+</body>
+</html>

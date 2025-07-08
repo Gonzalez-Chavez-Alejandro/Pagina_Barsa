@@ -1,0 +1,178 @@
+/* --------------------------------------
+   MODAL DE CONFIRMACIÓN
+-------------------------------------- */
+.modal-confirm {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content-confirm {
+  background-color: #fff0f0;
+  border: 2px solid red;
+  color: #a70000;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 300px;
+  font-weight: bold;
+}
+
+.modal-content-confirm .botones {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn-confirmar {
+  background-color: red;
+  color: white;
+}
+
+/* --------------------------------------
+            MODAL AGREGAR
+-------------------------------------- */
+.btn-cancelar {
+  background-color: #aaa;
+  color: white;
+  margin-bottom: 10px;
+}
+
+
+/* Botón mejorado */
+.btn-agregar-usuario {
+  position: relative;
+  background-color: #ffffff;
+  color: #2c3e50;
+  border: 1.5px solid #2c3e50;
+  padding: 9px 20px;
+  font-size: 1.05rem;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  z-index: 1;
+  margin-right: 4px;
+}
+
+
+.btn-agregar-usuario:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-color: #1a2530;
+  color: #1a2530;
+}
+
+.btn-agregar-usuario:hover::before {
+  opacity: 1;
+  background-position: left top;
+}
+
+.btn-agregar-usuario:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .filtros-usuarios {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-agregar-usuario {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .search-container-usuarios {
+    max-width: 100%;
+  }
+
+  .input-busqueda-usuarios {
+    font-size: 0.95rem;
+    padding: 9px 10px 9px 34px;
+  }
+
+  .icono-busqueda {
+    font-size: 0.9rem;
+    left: 10px;
+  }
+}
+
+/* Estilo del encabezado con ícono */
+.usuarios-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  /* Se añade margen inferior aquí si se necesita separación con lo siguiente */
+}
+
+/* Contenedor redondo para el ícono */
+.icon-usuarios {
+  background-color: #007acc;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s;
+  /* Se eliminó margin-bottom para que quede alineado con el h2 */
+}
+
+.icon-usuarios:hover {
+  background-color: #005fa3;
+}
+
+.icono-usuarios {
+  color: #ffffff;
+  font-size: 1.6rem;
+}
+
+h2.titulo-usuarios {
+  font-size: 1.5rem;
+  color: #1b1f23;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Encabezado responsivo */
+@media (max-width: 600px) {
+  .usuarios-header {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .titulo-usuarios {
+    font-size: 1.3rem;
+  }
+
+  .icon-usuarios {
+    width: 40px;
+    height: 40px;
+    /* Se eliminó el margen que causaba desplazamiento extraño */
+  }
+
+  .icono-usuarios {
+    font-size: 1.3rem;
+  }
+}

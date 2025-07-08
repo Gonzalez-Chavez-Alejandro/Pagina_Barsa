@@ -1,0 +1,259 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link rel="icon" href="https://res.cloudinary.com/dacrpsl5p/image/upload/v1745430696/Logo-Negro-B_c6wznv.png"
+    type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'Css/Principal.css' %}">
+  <link rel="stylesheet" href="{% static 'Css/Carrito.css' %}">
+  <link rel="stylesheet" href="{% static 'Css/Home-producto-views.css' %}">
+  <link rel="stylesheet" href="{% static 'Css/Header.css' %}">
+  <link rel="stylesheet" href="{% static 'Css/Home.css' %}">
+  <link rel="stylesheet" href="{% static 'Css/Home-Ubicacion.css' %}">
+  <link rel="stylesheet" href="{% static 'Css/foother.css' %}">
+  <link rel="stylesheet" href="{% static 'Css/Home-Principal-Catalogo.css' %}">
+</head>
+ 
+<body>
+  <style>
+    .Home-Categorias {
+      background-color: #f8f9fa;
+    }
+    body {
+      background-color: #f8f9fa;
+    }
+    ul#lista-ubicaciones-contactanos,ul#lista-telefonos-contactanos {
+    margin-left: 2rem;
+}
+  </style>
+  {% include 'includes/header.html' %}
+  {% include 'includes/spinner.html' %}
+  <main>
+    {% block content %}
+    <!-- Aquí va el contenido específico de cada página -->
+    {% endblock %}
+  </main>
+
+
+  <div class="home-principio-page">
+    <div class="contenido-izquierda">
+      <img src="https://res.cloudinary.com/dacrpsl5p/image/upload/v1745430695/Logo-Negro_nfvywi.png"
+        alt="Barsa Muebles">
+      <div class="lineas-botones ">
+        <div class="lineas">
+          <h2 class="lineas-h2-slogan">LLENA TU VIDA DE ESPACIO</h2>
+          <div class="decor-lineas"></div>
+        </div>
+
+        <div class="botones-container">
+          <a href="{% url 'catalogo' %}" class="btn-ver-catalogos">
+            <i class="fas fa-book-open"></i> Ver Catálogo
+          </a>
+          <a href="/productos/" class="btn-ver">
+            <i class="fas fa-box-open"></i> Ver Productos
+          </a>
+        </div>
+      </div>
+    </div>
+    <hr>
+    
+    <img src="https://res.cloudinary.com/dacrpsl5p/image/upload/v1750054689/9943489_skeewb.png" alt="Sillón"
+        class="icono-sillon">
+  </div>
+
+
+  <h2 class="carousel-title">Categorías Destacadas</h2>
+
+  
+  <div class="carousel-wrapper">
+    <button id="leftArrow" class="arrow">&#10094;</button>
+    <div id="carouselCategorias" class="carousel">
+      <!-- Aquí van las cards -->
+    </div>
+    <button id="rightArrow" class="arrow">&#10095;</button>
+  </div>
+
+<div class="obrasa-container">
+    <div class="obrasa-image-section">
+        <img src="https://res.cloudinary.com/dacrpsl5p/image/upload/v1750446909/Captura_de_pantalla_2025-03-05_102043-removebg-preview_wevaip.png" alt="Muebles Obrasa" class="obrasa-image">
+    </div>
+    
+    <div class="obrasa-content-section">
+        <div class="obrasa-header">
+            <h1 class="obrasa-title">Barsa</h1>
+            <p class="obrasa-subtitle">MUEBLES</p>
+        </div>
+        
+        <p class="obrasa-slogan">LLEVA LA VIDA A TU ESPACIO</p>
+        
+        <button id="abrirCatalogoBtn" class="obrasa-button">
+            Ver Catálogo
+        </button>
+    </div>
+</div>
+
+  <div class="container-ubicacion-tel">
+    <section class="contacto">
+      <h1>CONTACTO</h1>
+
+      <div class="telefonos">
+        <h3>☎ Teléfonos</h3>
+        <ul id="lista-telefonos-contactanos"></ul>
+      </div>
+
+      <div class="ubicacion">
+        <h3>📍 Ubicación</h3>
+        <ul id="lista-ubicaciones-contactanos"></ul>
+      </div>
+
+      <div class="social-container" id="lista-redes-contactanos"></div>
+    </section>
+
+    <div class="ilustracion">
+      <img src="https://res.cloudinary.com/dacrpsl5p/image/upload/v1747461124/Ubicacion_txuqry.svg" src="https://undraw.co/illustration.svg" alt="Ilustración bonita de undraw Ubicacion" />
+    </div>
+  </div>
+
+
+  {% include 'includes/carrito.html' %}
+  {% include 'includes/foother.html' %}
+  {% include 'includes/toast.html' %}
+    <script src="{% static 'js/Admin-mostrarToast.js' %}"></script>
+ 
+  <script src="{% static 'js/Header.js' %}"></script>
+  <script src="{% static 'js/Home-Carrusel-Categorias.js' %}"></script>
+  <script src="{% static 'js/Carrito.js' %}"></script>
+  <script>//mostrarToast("Producto no cargado aún.", "info");</script>
+<script>
+  window.addEventListener("DOMContentLoaded", async () => {
+    try {
+      const res = await fetch("/api/footer/");
+      if (!res.ok) throw new Error("No se pudo obtener datos del footer");
+
+      const data = await res.json();
+
+      // Teléfonos
+      const phoneList = document.getElementById("lista-telefonos-contactanos");
+      phoneList.innerHTML = '';
+      (data.phones || []).forEach(phone => {
+        const li = document.createElement("li");
+        li.textContent = phone;
+        phoneList.appendChild(li);
+      });
+
+      // Ubicaciones
+      const locationList = document.getElementById("lista-ubicaciones-contactanos");
+      locationList.innerHTML = '';
+      (data.locations || []).forEach(loc => {
+        const li = document.createElement("li");
+        li.textContent = loc;
+        locationList.appendChild(li);
+      });
+
+      // Redes sociales
+      const socialContainer = document.getElementById("lista-redes-contactanos");
+      socialContainer.innerHTML = '';
+      for (const [platform, url] of Object.entries(data.socials || {})) {
+        if (!url) continue;
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+
+        // Determinar clases para estilos y colores
+        let baseClass = "social-icon";
+        let platformClass = "";
+
+        switch (platform.toLowerCase()) {
+          case "facebook":
+            platformClass = "facebook";
+            break;
+          case "instagram":
+            platformClass = "instagram";
+            break;
+          case "whatsapp":
+            platformClass = "whatsapp";
+            break;
+          case "email":
+          case "gmail":
+            platformClass = "gmail";
+            break;
+          default:
+            platformClass = platform.toLowerCase(); // fallback
+        }
+
+        const iconClass = platform === "email" || platform === "gmail"
+          ? "fas fa-envelope"
+          : `fab fa-${platform.toLowerCase()}`;
+
+        // Aplicar clases definidas en tu CSS
+        a.className = `${baseClass} ${platformClass}`;
+        a.innerHTML = `<i class="${iconClass}"></i>`;
+        socialContainer.appendChild(a);
+      }
+
+    } catch (err) {
+      console.error("Error cargando datos de contacto:", err);
+    }
+  });
+</script>
+<script>
+(() => {
+  const STORAGE_KEY = 'pdfConfig';
+  
+  const API_URL = '/catalogos/catalogo-api/';  // Asegúrate que esta ruta responde GET sin auth
+
+  const abrirCatalogo = (url) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
+  const cargarDesdeAPI = async () => {
+    try {
+      const response = await fetch(API_URL);  // GET para obtener URL actual
+      if (!response.ok) throw new Error('Error al obtener catálogo');
+
+      const data = await response.json();
+      const urlPdf = data.url_pdf || DEFAULT_LINK;
+
+      // Guarda en localStorage para sincronizar con otros scripts
+      localStorage.setItem(STORAGE_KEY, urlPdf);
+
+      // Actualizar botón para abrir PDF
+      const btn = document.getElementById('abrirCatalogoBtn');
+      btn.onclick = () => abrirCatalogo(urlPdf);
+
+    } catch (error) {
+      console.error('No se pudo cargar el catálogo desde API:', error);
+
+      const enlaceLocal = localStorage.getItem(STORAGE_KEY) || DEFAULT_LINK;
+      const btn = document.getElementById('abrirCatalogoBtn');
+      btn.onclick = () => abrirCatalogo(enlaceLocal);
+    }
+  };
+
+  window.addEventListener('storage', (e) => {
+    if (e.key === STORAGE_KEY) {
+      const btn = document.getElementById('abrirCatalogoBtn');
+      btn.onclick = () => abrirCatalogo(e.newValue);
+    }
+  });
+
+  document.addEventListener('DOMContentLoaded', cargarDesdeAPI);
+})();
+</script>
+  <script>
+    const urlConfiguracionUsuario = "{% url 'configuracion_usuario' %}";
+  </script>
+  <script src="{% static 'js/Admin-Manda.js' %}"></script>
+  <script src="{% static 'js/Admin-Home.js' %}"></script>
+</body>
+</html>

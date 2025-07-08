@@ -1,0 +1,156 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f7fa;
+  color: #333;
+}
+
+/* Contenedor general centrado */
+.container-ubicacion-tel {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 2rem;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  max-width: 1200px;
+  margin: 2rem 11rem;
+  /* ✅ Centrado horizontal */
+}
+
+/* Sección de contacto */
+.contacto {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contacto h1 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  border-bottom: 3px solid #3498db;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+}
+
+.contacto h3 {
+  font-size: 1.2rem;
+  color: #34495e;
+  margin-bottom: 0.5rem;
+}
+
+.telefonos,
+.ubicacion {
+  background: #ecf0f1;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+#lista-telefonos,
+#lista-ubicaciones {
+  list-style: none;
+  padding-left: 1rem;
+  margin: 0;
+}
+
+#lista-telefonos li::before,
+#lista-ubicaciones li::before {
+  content: "•";
+  color: #2980b9;
+  margin-right: 0.5rem;
+}
+
+/* Redes sociales - diseño original */
+.social-container {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: center;
+  /* ✅ centrado */
+}
+
+.social-icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: white;
+  font-size: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos específicos por red social */
+.social-icon.facebook {
+  background-color: #3b5998;
+}
+
+.social-icon.instagram {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+}
+
+.social-icon.whatsapp {
+  background-color: #25D366;
+}
+
+
+
+
+a.social-icon.gmail {
+  background-color: #D44638;
+  /* Un poco más oscuro al pasar el cursor */
+}
+
+
+/* Ilustración a la derecha */
+.ilustracion {
+  flex: 0 0 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ilustracion img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  transform: translate(0%, 23%);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container-ubicacion-tel {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    margin: 1rem;
+  }
+
+  .ilustracion {
+    display: none;
+  }
+
+  .contacto h1 {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .social-container {
+    justify-content: center;
+  }
+}
+
+li {
+  margin: 0 0 0 0px;
+}

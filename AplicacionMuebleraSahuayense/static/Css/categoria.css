@@ -1,0 +1,213 @@
+.btn-agregar-categoria {
+  background-color: #0e970e;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  max-width: 129px;
+
+  text-transform: uppercase;
+}
+
+button.editar-btn-categoria {
+  max-width: 88px;
+  margin: 0 4px 1px 3px;
+  border: 2px solid black;
+}
+
+.btn-agregar-categoria i {
+  font-size: 16px;
+}
+
+.modal-contenido-agregar {
+  font-weight: bold;
+  background: white;
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 10px;
+  margin: 10% auto;
+  /* centra vertical y horizontalmente */
+  box-sizing: border-box;
+}
+
+.cancelar-btn-categoria {
+  /*padding: 0.5rem 15px;*/
+  padding: 0.5rem 3%;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #e0e0e0;
+  color: #000;
+  border: 2px solid black;
+  max-width: 105px;
+  text-transform: uppercase;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-contenido-categoria {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-56%, -50%);
+  background-color: #ffffff;
+  border: 3px solid #000000;
+  /* Borde negro para máximo contraste */
+  color: #000000;
+  /* Texto negro para mejor legibilidad */
+  padding: 25px;
+  border-radius: 8px;
+  text-align: center;
+  width: 320px;
+  max-width: 90%;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+}
+
+.delete-btn-categoria {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: 2px solid #000000;
+  /* Borde negro para contraste */
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 15px;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+}
+
+.delete-btn-categoria:hover {
+  background-color: #b71c1c;
+  transform: translateY(-2px);
+}
+
+.delete-cancelar-btn-categoria {
+  background-color: #ffffff;
+  color: black;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: 2px solid #000000;
+  /* Borde negro para contraste */
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+}
+
+.delete-cancelar-btn-categoria:hover {
+  background-color: #388E3C;
+  transform: translateY(-2px);
+}
+
+.botones-accion {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+}
+
+.icono-eliminar,
+.icono-cancelar {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+
+.cerrar {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal input,
+.modal textarea {
+  width: 100%;
+  max-width: 100%;
+  /* evita que se desborde */
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 14px;
+  box-sizing: border-box;
+  /* asegura que padding no rompa el diseño */
+  resize: vertical;
+  /* permite ajustar altura del textarea */
+}
+
+.modalEliminarCategoria {
+  background-color: #fff0f0;
+  border: 2px solid red;
+  color: #a70000;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 300px;
+  font-weight: bold;
+}
+
+.categoria-btn-agregar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 7px 8px;
+  background-color: #5ab312;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  white-space: nowrap;
+  margin: 0px 0px 18px 2px;
+}
+
+.h3-agregar-categoria {
+  text-align: center;
+  margin: 16px auto;
+  display: block;
+  width: 100%;
+  font-size: 20px;
+  /* Opcional: ajustar tamaño si se desea más visible */
+}
+
+
+
+
+/* Opcional: estilos adicionales para pantallas pequeñas */
+@media (max-width: 480px) {
+
+  .modal input,
+  .modal textarea {
+    font-size: 16px;
+    /* texto más legible en móviles */
+    padding: 12px;
+  }
+
+  button.editar-btn-categoria {
+    max-width: 426px;
+    max-height: 36px;
+
+  }
+}
+
+.modal-contenido {
+  margin: 5% auto;
+}

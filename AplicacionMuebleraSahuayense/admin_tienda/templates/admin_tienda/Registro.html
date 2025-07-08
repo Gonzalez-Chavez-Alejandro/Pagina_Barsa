@@ -1,0 +1,166 @@
+{% load static %}
+<script src="{% static 'js/Header.js' %}"></script>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro</title>
+  <link rel="icon" href="https://res.cloudinary.com/dacrpsl5p/image/upload/v1745430696/Logo-Negro-B_c6wznv.png"
+    type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.cdnfonts.com/css/open-dyslexic" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'Css/Header.css' %}">
+  <link rel="stylesheet" href="{% static 'Css/Carrito.css' %}">
+  <link rel="stylesheet" href="{% static 'Css/Principal.css' %}">
+  <link rel="stylesheet" href="{% static 'Css/Registro.css' %}">
+  <link rel="stylesheet" href="{% static 'Css/foother.css' %}">
+</head>
+
+<body>
+
+  {% include 'includes/header.html' %}
+  {% include 'includes/spinner.html' %}
+  <div class="login-container">
+    <h1>Registrarse</h1>
+    <form id="registro-form" method="post">
+      {% csrf_token %}
+
+      <div class="form-grid">
+        <div class="input-group">
+          <label for="nombre">Nombre completo</label>
+          <div style="position: relative;">
+            <i class="fas fa-user input-icon"></i>
+            <input type="text" id="nombre" name="first_name" class="input-field" placeholder="Tu nombre" required>
+            
+          </div>
+          <small id="nombre-error" class="error-message" style="color: red; display: none;"></small>
+          <small id="nombre-error" class="error-message" style="color: red; display: none;">Solo se permiten
+            letras.</small>
+        </div>
+
+        <div class="input-group">
+          <label for="telefono">Teléfono</label>
+          <div style="position: relative;">
+            <i class="fas fa-phone input-icon"></i>
+            <input type="tel" id="telefono" name="phoneUser" class="input-field" placeholder="+52 353 456 7890"
+              maxlength="20" oninput="this.value = this.value.replace(/[A-Za-z]/g, '')" required>
+             
+          </div>
+        </div>
+
+
+        <div class="input-group">
+          <label for="edad">Edad</label>
+          <div style="position: relative;">
+            <i class="fas fa-user input-icon"></i>
+            <input type="number" id="edad" name="ageUser" class="input-field" placeholder="Tu edad" min="1" max="100" required>
+          </div>
+          <small id="edad-error" class="error-message" style="color: red; display: none;">Ingresa una edad
+            válida.</small>
+        </div>
+
+
+        <div class="input-group">
+          <label for="contrasena">Contraseña</label>
+          <div class="password-container" style="position: relative;">
+            <i class="fas fa-lock input-icon"></i>
+            <input type="password" id="contrasena" name="password" class="input-field" placeholder="••••••••" required>
+            <button type="button" class="toggle-password"><i class="fas fa-eye-slash"></i></button>
+          </div>
+          <small id="contrasena-error" class="error-message" style="color: red; display: none;">Mínimo 8
+            caracteres.</small>
+        </div>
+
+        <div class="input-group">
+          <label for="correo">Correo electrónico</label>
+          <div style="position: relative;">
+            <i class="fas fa-envelope input-icon"></i>
+            <input type="email" id="correo" name="email" class="input-field" placeholder="ejemplo@correo.com" required>
+          </div>
+          <small id="correo-error" class="error-message" style="color: red; display: none;"></small>
+        </div>
+
+
+        <div class="input-group">
+          <label for="confirmar_contrasena">Confirmar contraseña</label>
+          <div class="password-container" style="position: relative;">
+            <i class="fas fa-lock input-icon"></i>
+            <input type="password" id="confirmar_contrasena" name="confirm_password" class="input-field"
+              placeholder="••••••••" required>
+            <button type="button" class="toggle-password"><i class="fas fa-eye-slash"></i></button>
+          </div>
+          <small id="confirmar-error" class="error-message" style="color: red; display: none;">Las contraseñas no
+            coinciden.</small>
+        </div>
+      </div>
+
+      <div class="check-box-terminos-condiciones">
+        <label>
+          <input type="checkbox" id="terminos" />
+          Acepto los <a href="https://drive.google.com/file/d/1A_YUj1lajbiDjicZyKujmHHkMM_xlf8f/view?usp=sharing"
+            style="color:#007acc;" target="_blank" rel="noopener noreferrer">términos y condiciones</a>
+        </label>
+      </div>
+
+      <button type="submit" class="submit-btn">Registrarse</button>
+    </form>
+  </div>
+
+
+
+
+  {% include 'includes/carrito.html' %}
+  {% include 'includes/foother.html' %}
+  {% include 'includes/toast.html' %}
+    <script src="{% static 'js/Admin-mostrarToast.js' %}"></script>
+<script>document.addEventListener('DOMContentLoaded', function () {
+    
+  // Código para toggle-password
+  document.querySelectorAll('.toggle-password').forEach(button => {
+    button.addEventListener('click', function () {
+      const passwordInput = this.previousElementSibling;
+      const icon = this.querySelector('i');
+
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.classList.replace('fa-eye-slash', 'fa-eye');
+      } else {
+        passwordInput.type = 'password';
+        icon.classList.replace('fa-eye', 'fa-eye-slash');
+      }
+    });
+  });
+});
+</script>
+
+  <script src="{% static 'js/Header.js' %}"></script>
+  <script src="{% static 'js/Carrito.js' %}"></script>
+  <script src="{% static 'js/Admin-Manda.js' %}"></script>
+  <script src="{% static 'js/Registro-p.js' %}"></script>
+  <script src="{% static 'js/Header.js' %}"></script>
+  <script>document.addEventListener('DOMContentLoaded', function () {
+    
+  // Código para toggle-password
+  document.querySelectorAll('.toggle-password').forEach(button => {
+    button.addEventListener('click', function () {
+      const passwordInput = this.previousElementSibling;
+      const icon = this.querySelector('i');
+
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.classList.replace('fa-eye-slash', 'fa-eye');
+      } else {
+        passwordInput.type = 'password';
+        icon.classList.replace('fa-eye', 'fa-eye-slash');
+      }
+    });
+  });
+});
+</script>
+</body>
+
+</html>

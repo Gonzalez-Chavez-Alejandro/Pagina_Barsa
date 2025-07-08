@@ -1,0 +1,260 @@
+/* Contenedor principal del formulario */
+.contener-formulario {
+  max-width: 800px;
+  margin: auto;
+  background: #f0f8ff;
+  padding: 3rem 2rem;
+  border-radius: 16px;
+
+  /* Borde con degradado sutil y contorno más suave */
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  border-image: linear-gradient(135deg, #007acc, #ffffff) 1;
+
+  /* Sombra profesional */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Título centrado */
+.form-title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: bold;
+  color: #007acc;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Estructura del formulario */
+#form-superuser {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+#form-superuser .input-group {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+#form-superuser .full-width {
+  grid-column: span 2;
+}
+
+/* Etiquetas */
+#form-superuser label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
+  font-size: 15px;
+}
+
+/* Contenedor del input + ícono */
+#form-superuser .input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Íconos */
+#form-superuser .input-icon {
+  position: absolute;
+  left: 14px;
+  font-size: 15px;
+  color: #999;
+}
+
+/* Campos de entrada */
+#form-superuser .input-field {
+  width: 100%;
+  padding: 12px 40px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: border 0.2s ease;
+}
+
+#form-superuser .input-field:focus {
+  border: 2px solid #007acc;
+  /* Aumenta grosor de 1px a 2px */
+  box-shadow: 0 0 6px rgba(0, 122, 204, 0.4);
+  /* Sombra más visible */
+  outline: none;
+}
+
+#form-superuser .input-field {
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+/* Botón de mostrar/ocultar contraseña */
+#form-superuser .toggle-password {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+/* Botón enviar */
+#form-superuser .submit-btn {
+  padding: 14px;
+  background-color: #3A6073;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#form-superuser .submit-btn:hover {
+  background-color: #005fa3;
+}
+
+/* Mensajes */
+#form-superuser .error-message {
+  color: red;
+  font-size: 13px;
+  margin-top: 4px;
+  display: none;
+}
+
+#form-superuser .success-message {
+  color: green;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #form-superuser {
+    grid-template-columns: 1fr;
+  }
+
+  #form-superuser .full-width {
+    grid-column: span 1;
+  }
+
+  .form-title {
+    font-size: 22px;
+  }
+}
+
+
+
+
+
+/* Botón más visible */
+.submit-btn.activo {
+  background-color: #00aaff;
+  box-shadow: 0 4px 12px rgba(0, 170, 255, 0.4);
+  transform: scale(1.02);
+}
+
+/* Al pasar el mouse */
+.submit-btn.activo:hover {
+  background-color: #008ecc;
+}
+
+
+
+
+
+
+/* Estilo para la línea divisora */
+.title-divider {
+  width: 10rem;
+  height: 3px;
+  background: linear-gradient(90deg, #007acc, #66ccff);
+  margin: 0.8rem auto 1.2rem;
+  border-radius: 3px;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+/* Efecto hover opcional para la línea */
+.title-divider:hover {
+  opacity: 1;
+  transform: scaleX(1.1);
+}
+
+/* Ajuste para mantener la alineación */
+.form-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+p.form-subtitle {
+  margin-top: 0px;
+}
+
+/* Añadiendo a tu CSS existente */
+
+/* Cabecera del formulario */
+.form-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.form-icon {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #007acc, #66ccff);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 1.8rem;
+  box-shadow: 0 4px 12px rgba(0, 122, 204, 0.3);
+}
+
+.form-subtitle {
+  color: #666;
+  font-size: 0.95rem;
+  margin-top: -1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Mejoras para el botón */
+.submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.submit-btn.activo {
+  background: linear-gradient(135deg, #007acc, #00aaff);
+  box-shadow: 0 4px 12px rgba(0, 170, 255, 0.4);
+}
+
+.submit-btn.activo:hover {
+  background: linear-gradient(135deg, #006bb3, #008ecc);
+  transform: translateY(-2px);
+}
+
+.btn-icon {
+  transition: transform 0.3s ease;
+}
+
+.submit-btn:hover .btn-icon {
+  transform: scale(1.1);
+}
+
+/* Mejoras para los inputs */
+.input-field:focus {
+  background-color: #f8faff;
+}
+
+/* Animación suave para los grupos */
+.input-group {
+  transition: all 0.3s ease;
+}

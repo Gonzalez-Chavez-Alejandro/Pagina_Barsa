@@ -1,0 +1,263 @@
+:root {
+  --primary-color: #111827;
+  /* Negro suave */
+  --secondary-color: #374151;
+  /* Gris azulado */
+  --accent-color: #ef4444;
+  /* Rojo elegante */
+  --background-color: #f9fafb;
+  /* Fondo suave */
+  --card-background: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.08);
+}
+
+body {
+  background-color: var(--background-color);
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  color: var(--primary-color);
+}
+
+/* Card principal */
+.card-contacto {
+  background: var(--card-background);
+  padding: 3rem;
+
+  box-shadow: 0 18px 45px var(--shadow-color);
+  max-width: 1300px;
+  margin: auto;
+  animation: fadeInUp 0.8s ease both;
+}
+
+/* Grid */
+.container-ubicacion-tel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 3rem;
+  align-items: center;
+  padding: 0 1.5rem;
+}
+
+/* Imagen ilustrativa */
+.ilustracion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ilustracion img {
+  max-width: 450px;
+  width: 100%;
+  height: auto;
+  animation: float 6s ease-in-out infinite;
+  filter: drop-shadow(0 8px 14px var(--shadow-color));
+}
+
+/* Sección contacto */
+.contacto {
+  background: var(--card-background);
+  padding: 2.5rem 2rem;
+  border-radius: 20px;
+  animation: fadeInUp 0.8s ease both;
+}
+
+.contacto h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  position: relative;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.contacto h1::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 70px;
+  height: 4px;
+  background: var(--accent-color);
+  border-radius: 4px;
+}
+
+.contacto h1::after {
+  display: none;
+}
+
+
+.contact-group {
+  margin-bottom: 2rem;
+}
+
+.contact-group h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--secondary-color);
+}
+
+.contact-list {
+  list-style: none;
+  padding-left: 1.5rem;
+}
+
+.contact-list li {
+  position: relative;
+  margin-bottom: 0.9rem;
+  padding-left: 1.3rem;
+  font-size: 1rem;
+  color: #374151;
+}
+
+#lista-telefonos-contactanos li::before {
+  content: '\f095';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  position: absolute;
+  left: 0;
+  color: var(--accent-color);
+}
+
+#lista-ubicaciones-contactanos li::before {
+  content: '\f3c5';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  position: absolute;
+  left: 0;
+  color: var(--accent-color);
+}
+
+/* Redes sociales */
+.social-container {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.social-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 6px 15px var(--shadow-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Colores específicos */
+.facebook {
+  background-color: #3b5998;
+}
+
+.whatsapp {
+  background-color: #25d366;
+}
+
+.instagram {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+}
+
+.gmail {
+  background-color: #db4437;
+}
+
+/* Animaciones */
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container-ubicacion-tel {
+    grid-template-columns: 1fr;
+
+  }
+
+  .ilustracion {
+    display: none;
+  }
+
+  .contacto {
+    padding: 2rem;
+  }
+
+  .card-contacto {
+    padding: 2rem 0rem;
+  }
+
+  .contacto h1 {
+    font-size: 2.0rem;
+  }
+
+  .contacto::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 20%;
+    /* para centrar verticalmente: (100% - 60%) / 2 = 20% */
+    width: 4px;
+    height: 60%;
+    background: linear-gradient(180deg, #ef4444, #b91c1c);
+    border-radius: 2px;
+    box-shadow: 0 0 6px #ef4444aa;
+  }
+}
+
+.social-container a {
+  text-decoration: none;
+}
+
+/* Quitar margin-left para evitar overflow */
+.contacto {
+  position: relative;
+  padding-left: 1.5rem;
+  /* espacio para la línea */
+  margin-left: 0;
+  /* quitar */
+  box-sizing: border-box;
+  /* que el padding no aumente el ancho */
+  width: 100%;
+}
+
+/* Asegurarnos que el contenedor padre tiene padding */
+.container-ubicacion-tel {
+  padding-left: 1.5rem;
+  /* opcional para no pegar todo al borde */
+  padding-right: 1.5rem;
+  box-sizing: border-box;
+}

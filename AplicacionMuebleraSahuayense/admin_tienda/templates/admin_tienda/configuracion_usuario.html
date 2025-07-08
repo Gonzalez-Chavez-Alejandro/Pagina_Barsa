@@ -1,0 +1,488 @@
+{% load static %}
+<script src="{% static 'js/Header.js' %}"></script>
+<!DOCTYPE html>
+<html lang="es">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Configuración Usuario</title>
+<link rel="icon" href="https://res.cloudinary.com/dacrpsl5p/image/upload/v1745430696/Logo-Negro-B_c6wznv.png"
+    type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="{% static 'Css/Usuario-Menu.css' %}">
+<link rel="stylesheet" href="{% static 'Css/Principal.css' %}">
+<link rel="stylesheet" href="{% static 'Css/Carrito.css' %}">
+<link rel="stylesheet" href="{% static 'Css/Header.css' %}">
+<link rel="stylesheet" href="{% static 'Css/Login.css' %}">
+<link rel="stylesheet" href="{% static 'Css/configuracion_usuario.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+    /* Estilos para botones accesibles */
+    .encargo-acciones {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 2px solid #e0e0e0;
+}
+
+.btn-pdf,
+.btn-eliminar {
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 2px solid transparent;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo PDF mejorado */
+.btn-pdf {
+    background: #2c3e50;
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-pdf::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.1) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0.1) 75%,
+        transparent 75%,
+        transparent
+    );
+    background-size: 10px 10px;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+.btn-pdf:hover {
+    background: #1a252f;
+    border-color: #000000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-pdf:hover::before {
+    opacity: 0.8;
+}
+
+/* Estilo Eliminar mejorado */
+.btn-eliminar {
+    background: #e74c3c;
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-eliminar::before,
+.btn-eliminar::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 2px;
+    background: white;
+    transform: translate(-50%, -50%) rotate(45deg);
+    opacity: 0.5;
+}
+
+.btn-eliminar::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.btn-eliminar:hover {
+    background: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-eliminar:hover::before,
+.btn-eliminar:hover::after {
+    opacity: 0.8;
+}
+
+/* Iconos para los botones */
+.btn-pdf::after {
+    content: "";
+    display: inline-block;
+    font-size: 1.1rem;
+}
+
+.btn-eliminar::after {
+    content: "🗑️";
+    display: inline-block;
+    font-size: 1.1rem;
+}  
+</style>
+</head>
+
+<body>
+    {% include 'includes/header.html' %}
+    {% include 'includes/spinner.html' %}
+    <button class="menu-hamburguesa" onclick="toggleMenuHamburguesa()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <nav class="sidebar" id="menuLateral">
+        <button class="btn-cerrar-menu" onclick="toggleMenuHamburguesa()">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="border-top"></div>
+        <a href="#" onclick="mostrarSeccion('inicio')"><i class="fas fa-home"></i>Inicio</a>
+        <a href="#" onclick="mostrarSeccion('mi-perfil')"><i class="fas fa-user"></i>Mi Perfil</a>
+        <a href="#" onclick="mostrarSeccion('mis-encargos')"><i class="fas fa-box"></i>Mis Encargos</a>
+
+    </nav>
+
+<style>
+.um-usuario-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.um-info-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    gap: 0.5rem;
+    color: #4a5568;
+    font-size: 0.9rem;
+    word-break: break-word;
+    user-select: text;
+}
+
+.um-fas {
+    color: #718096;
+    width: 1rem;
+    flex-shrink: 0;
+    user-select: none;
+}
+h3.h3-encargo {
+    
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+}
+.um-usuario-info {
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 1rem;
+}
+.encargo-fecha {
+  color: rgb(100, 116, 139);
+  font-size: 0.9rem;
+  float: right; /* ✅ Esto lo orilla a la derecha dentro del h3 */
+}
+
+
+</style>
+
+
+    <div class="main-content">
+        <!-- Sección de Mis Encargos -->
+        <section id="mis-encargos" class="seccion-contenido">
+            <h2 class="h2-title">📦 Mis Encargos</h2>
+            <p class="p-seleccion">Información de los pedidos</p>
+            <div class="div-informacion-pedidos"></div>
+            <div id="lista-encargos" class="lista-encargos"></div>
+        </section>
+
+        <section id="inicio" class="seccion-contenido">
+            <h2 class="h2-title">🏠 Inicio</h2>
+            <p class="p-seleccion">Bienvenido al panel de configuración</p>
+
+            <div class="bienvenida-card">
+                <div class="bienvenida-icono">
+                    <i class="fas fa-user-astronaut"></i>
+                </div>
+                <h2 class="bienvenida-titulo">¡Bienvenido a tu Panel!</h2>
+                <p class="bienvenida-descripcion">
+                    Gestiona tu perfil personalizado y mantén el control de todos tus encargos.
+                    Navega fácilmente usando nuestro menú intuitivo o accede directamente a las
+                    secciones principales desde aquí.
+                </p>
+                <div class="bienvenida-botones">
+                    <button class="btn-ir" onclick="mostrarSeccion('mi-perfil')">
+                        <i class="fas fa-id-card"></i> Mi Perfil
+                    </button>
+                    <button class="btn-ir" onclick="mostrarSeccion('mis-encargos')">
+                        <i class="fas fa-rocket"></i> Mis Encargos
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="mi-perfil" class="seccion-contenido">
+            <h2 class="h2-title">👤 Mi Perfil</h2>
+            <p class="p-seleccion">Información del perfil del usuario</p>
+
+            <div class="credential-card">
+                <div class="credential-header">
+                    <h2>
+                        <div class="credential-icon">
+                            <i class="fas fa-id-card"></i>
+                        </div>
+                        Editar Datos
+                    </h2>
+                </div>
+
+                <form id="form-configuracion">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Nombre completo</label>
+                            <input type="text" id="nombre" placeholder="Ej: Juan Pérez" title="Formato: Nombre Apellido"
+                                required autocomplete="off">
+                            <span id="error-nombre" class="error-message"
+                                style="display:none; color: red; font-size: 0.9em; margin-top: 4px;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Teléfono</label>
+                            <input type="tel" id="telefono" placeholder="+52 55 1234 5678" required autocomplete="off"
+                                oninput="this.value = this.value.replace(/[A-Za-z]/g, '')">
+                            <span id="error-telefono" class="error-message"
+                                style="display:none; color: red; font-size: 0.9em; margin-top: 4px;"></span>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Correo electrónico</label>
+                            <input type="email" id="correo" placeholder="ejemplo@dominio.com" required
+                                autocomplete="new-email" readonly onfocus="this.removeAttribute('readonly')" rows="3">
+                            <span id="error-correo" class="error-message"
+                                style="display:none; color: red; font-size: 0.9em; margin-top: 4px;"></span>
+                        </div>
+                        <style>
+                            textarea {
+                                width: 100%;
+                                padding: 10px;
+                                border: 1px solid #ccc;
+                                border-radius: 4px;
+                                resize: vertical;
+                                /* Permite al usuario ajustar la altura verticalmente */
+                                min-height: 1px;
+                                /* Altura mínima inicial */
+                            }
+                        </style>
+                        <div class="form-group full-width">
+                            <label>Ubicación</label>
+                            <textarea id="ubicacion" name="user_ubicacion" autocomplete="off"
+                                onfocus="this.removeAttribute('readonly')" placeholder="Ej: Sahuayo, Michoacán" required
+                                rows="3"></textarea>
+                            <span id="error-ubicacion" class="error-message"></span>
+                        </div>
+
+
+                        <div class="form-group full-width">
+                            <label>Contraseña actual <small>(para confirmar cambios)</small></label>
+                            <div style="position: relative;">
+                                <input type="password" id="validate" name="confirmar_cambios" placeholder="••••••••"
+                                    required autocomplete="off" inputmode="text">
+                                <button type="button" class="toggle-password">
+                                    <i class="fas fa-eye-slash"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Nueva contraseña <small>(opcional)</small></label>
+                            <div style="position: relative;">
+                                <input type="password" id="contrasena" placeholder="••••••••" autocomplete="off">
+                                <button type="button" class="toggle-password">
+                                    <i class="fas fa-eye-slash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-guardar">
+                        <i class="fas fa-save"></i> Guardar Cambios
+                    </button>
+                </form>
+            </div>
+        </section>
+<style>
+  /* Contenedor de notificaciones */
+  #notificaciones {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 320px;
+    width: 100%;
+  }
+
+  /* Toast Base */
+  .toast {
+    padding: 16px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Toast de Error con tachito */
+  .toast-error {
+    background: linear-gradient(135deg, #ff4d4d, #f44336);
+    color: white;
+    border-left: 4px solid #d32f2f;
+  }
+
+  /* Tachito (×) estilizado */
+  .toast-error::before {
+    content: "×"; /* Tachito Unicode */
+    margin-right: 12px;
+    font-size: 1.5em;
+    font-weight: bold;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  /* Barra de progreso */
+  .toast-error::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    animation: progressBar 5s linear forwards;
+  }
+
+  /* Animaciones */
+  @keyframes slideInRight {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  @keyframes progressBar {
+    from { width: 100%; }
+    to { width: 0%; }
+  }
+
+  /* Efecto hover */
+  .toast:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+</style>
+
+<div id="notificaciones"></div>
+
+        {% include 'includes/carrito.html' %}
+        {% include 'includes/toast.html' %}
+    <script src="{% static 'js/Admin-mostrarToast.js' %}"></script>
+
+    </div>
+    <div class="overlay-menu" id="overlayMenu" onclick="toggleMenuHamburguesa()"></div>
+
+    <head>
+        <script src="{% static 'js/Carrito.js' %}"></script>
+        <script src="{% static 'js/Usuarios-configuracion_usuario.js' %}"></script>
+        <script>
+            // Funciones del menú
+            function toggleMenuHamburguesa() {
+                const menu = document.getElementById('menuLateral');
+                const overlay = document.getElementById('overlayMenu');
+                const botonHamburguesa = document.querySelector('.menu-hamburguesa');
+
+                if (window.innerWidth <= 768) {
+                    menu.classList.toggle('mostrar-menu');
+                    overlay.style.display = menu.classList.contains('mostrar-menu') ? 'block' : 'none';
+                    botonHamburguesa.style.display = menu.classList.contains('mostrar-menu') ? 'none' : 'block';
+                }
+            }
+
+            // Actualizar función para cerrar menú al hacer click en overlay
+            document.getElementById('overlayMenu').addEventListener('click', function () {
+                if (window.innerWidth <= 768) {
+                    const menu = document.getElementById('menuLateral');
+                    const boton = document.querySelector('.menu-hamburguesa');
+                    menu.classList.remove('mostrar-menu');
+                    boton.innerHTML = '<i class="fas fa-bars"></i>';
+                    this.style.display = 'none';
+                }
+            });
+
+            // Actualizar función al cambiar tamaño de ventana
+            window.addEventListener('resize', function () {
+                const boton = document.querySelector('.menu-hamburguesa');
+                if (window.innerWidth > 768) {
+                    boton.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+            function mostrarSeccion(idSeccion) {
+                // Ocultar todas las secciones
+                document.querySelectorAll('.seccion-contenido').forEach(seccion => {
+                    seccion.classList.remove('seccion-activa');
+                });
+
+                // Mostrar sección seleccionada
+                const seccionActiva = document.getElementById(idSeccion);
+                if (seccionActiva) seccionActiva.classList.add('seccion-activa');
+
+                // Actualizar enlace activo
+                document.querySelectorAll('.sidebar a').forEach(enlace => {
+                    enlace.classList.remove('active');
+                    if (enlace.getAttribute('onclick')?.includes(idSeccion)) {
+                        enlace.classList.add('active');
+                    }
+                });
+
+                // Cerrar menú en móviles
+                if (window.innerWidth <= 768) {
+                    toggleMenuHamburguesa();
+                }
+            }
+
+            // Inicializar sección por defecto
+            document.addEventListener('DOMContentLoaded', () => {
+                mostrarSeccion('inicio');
+            });
+        </script>
+        <script src="{% static 'js/Admin-Manda.js' %}"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const hash = window.location.hash;
+
+                if (hash === "#mis-encargos") {
+                    mostrarSeccion("mis-encargos");
+                }
+            });
+        </script>
+        <script src="{% static 'js/Header.js' %}"></script>
+<script src="{% static 'js/header.js' %}"></script>
+</body>
+
+</html>

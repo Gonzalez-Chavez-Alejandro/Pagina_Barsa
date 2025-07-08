@@ -1,0 +1,1015 @@
+/* Contenido principal */
+.contenido {
+  margin-left: 250px;
+  padding: 50px 0px 0 11px;
+
+}
+
+h1 {
+  color: #2c3e50;
+}
+
+/* Menú lateral */
+.menu-lateral {
+  width: 250px;
+  height: 100vh;
+  background-color: #1e272e;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  padding-top: 52px;
+  transition: left 0.3s ease;
+  z-index: 999;
+}
+
+/* Botón de cerrar en la esquina derecha */
+.cerrar-menu {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.cerrar-menu:hover {
+  background-color: transparent;
+}
+
+/* Menú oculto por defecto en pantallas pequeñas */
+@media (max-width: 768px) {
+  .menu-lateral {
+    left: -260px !important;
+  }
+
+  .menu-lateral.mostrar-menu {
+    left: 0 !important;
+  }
+}
+
+.menu-lateral .menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-lateral .menu-item {
+  position: relative;
+}
+
+.menu-lateral .menu-button {
+  width: 100%;
+  background: none;
+  border: none;
+  color: white;
+  padding: 15px 20px;
+  text-align: left;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  z-index: 2;
+}
+
+.menu-lateral .menu-button:hover {
+  background-color: #485460;
+}
+
+.menu-lateral .menu-button i {
+  margin-right: 10px;
+  width: 20px;
+  text-align: center;
+}
+
+/* Submenús */
+.submenu {
+  background-color: #2f3640;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: none;
+  position: relative;
+  z-index: 1;
+}
+
+.submenu-item {
+  padding: 10px 30px;
+  font-size: 14px;
+  color: #dcdde1;
+  cursor: pointer;
+}
+
+.submenu-item:hover {
+  background-color: #353b48;
+}
+
+.menu-item.activo .submenu {
+  display: block;
+  z-index: 2;
+}
+
+
+
+/* Botón de menú (solo visible en móvil) */
+.boton-menu {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1000;
+  background-color: #1e272e;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.fa-times:before {
+  color: #1e272e;
+}
+
+/* Estilos responsive */
+@media (max-width: 3900px) {
+  .menu-lateral {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    position: fixed;
+    z-index: 1000;
+    height: 100%;
+  }
+
+  .menu-lateral.mostrar-menu {
+    transform: translateX(0);
+    padding: 45px 0 0px 0px;
+  }
+
+  .contenido {
+    margin-left: 0;
+  }
+
+  .boton-menu {
+    display: block;
+  }
+
+  .submenu {
+    padding-left: 30px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .menu-lateral .menu-button {
+    z-index: 2;
+  }
+
+  .fa-times:before {
+    color: #f4f4f4;
+  }
+}
+
+
+.admin-panel h2 {
+  color: #2c3e50;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #3498db;
+}
+
+.red {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.red label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+.red input[type="url"],
+.red input[type="email"] {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Íconos */
+.social-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.facebook {
+  background-color: #3b5998;
+}
+
+.instagram {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+}
+
+.whatsapp {
+  background-color: #25D366;
+}
+
+.gmail {
+  background-color: #D44638;
+}
+
+#admin-form h3 {
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  color: #2d3748;
+  padding: 0.8rem 1.2rem;
+  background: #f8fafc;
+  border-left: 4px solid #007bff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+
+
+/* Lista dinámica mejorada */
+#lista-telefonos-admin,
+#lista-ubicaciones-admin {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 1.25rem 5%;
+  border-radius: 8px;
+  gap: 1rem;
+}
+
+/* Items de lista con efecto hover */
+#lista-telefonos-admin div,
+#lista-ubicaciones-admin div {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: white;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+#lista-telefonos-admin div:hover,
+#lista-ubicaciones-admin div:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-color: #c3dafe;
+}
+
+/* Campos de entrada mejorados */
+#lista-telefonos-admin input,
+#lista-ubicaciones-admin input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+#lista-telefonos-admin input:focus,
+#lista-ubicaciones-admin input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+  outline: none;
+}
+
+/* Botón eliminar moderno */
+#lista-telefonos-admin button,
+#lista-ubicaciones-admin button {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 0.5rem 0.8rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: all 0.2s ease;
+}
+
+#lista-telefonos-admin button:hover,
+#lista-ubicaciones-admin button:hover {
+  background-color: #dc2626;
+  transform: scale(1.05);
+}
+
+/* Icono X para botón eliminar */
+#lista-telefonos-admin button::before,
+#lista-ubicaciones-admin button::before {
+  content: "×";
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+/* Botón Actualizar Contacto */
+[type="submit"] {
+  background: #007bff;
+  color: white;
+  padding: 0.8rem 1.75rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+[type="submit"]:hover {
+  background: #0066cc;
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
+}
+
+
+
+.social-container {
+  display: flex;
+  justify-content: center;
+  /* Centers horizontally */
+  align-items: center;
+  /* Centers vertically */
+  /* Or use text-align: center; if it's a block container */
+}
+
+
+.red {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.red label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  color: #333;
+  font-size: 15px;
+}
+
+.red input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #4CAF50;
+}
+
+.red input[type="url"],
+.red input[type="email"] {
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+}
+
+.red input[type="url"]:focus,
+.red input[type="email"]:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+
+.red input[type="url"],
+.red input[type="email"] {
+  width: 100%;
+  /* ✔ hace que se adapte al ancho del contenedor */
+  box-sizing: border-box;
+  /* ✔ evita que padding/border rompan el layout */
+}
+
+
+
+/* Botón final de enviar */
+.acciones-contacto {
+  margin-top: 2rem;
+}
+
+
+
+/* Oculta el contenido con animación */
+.contenido-seccion {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  padding: 0 0;
+}
+
+/* Cuando está activa, muestra el contenido */
+.seccion-activa .contenido-seccion {
+  max-height: 1000px;
+  padding: 0;
+}
+
+.right-button {
+  display: flex;
+  justify-content: flex-end;
+  /* Alinea los botones a la derecha */
+  gap: 10px;
+
+}
+
+button.Agregar-telefono,
+button.Agregar-ubicacion {
+  background-color: #4CAF50;
+  /* Verde base */
+  color: white;
+  border: none;
+  padding: 7px 8px;
+  font-size: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 12px 12px 12px auto;
+}
+
+/* Hover más sutil (sin sombra azul ni cambio agresivo) */
+button.Agregar-telefono:hover,
+button.Agregar-ubicacion:hover {
+  background-color: #3e8e41;
+  /* Verde más oscuro */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Efecto de clic (ligero) */
+button.Agregar-telefono:active,
+button.Agregar-ubicacion:active {
+  background-color: #367636;
+  transform: scale(0.99);
+}
+
+
+.Agregar-telefono i {
+  font-size: 18px;
+}
+
+.Agregar-telefono:hover {
+  background-color: #45a049;
+}
+
+.Agregar-telefono:active {
+  background-color: #3e8e41;
+}
+
+.Agregar-telefono:focus {
+  outline: 2px solid #2e7d32;
+  outline-offset: 2px;
+}
+
+/* Animación para la flechita */
+h3 i {
+  transition: transform 0.3s ease;
+}
+
+.seccion-activa h3 i {
+  transform: rotate(180deg);
+}
+
+
+
+.acciones-contacto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.acciones-contacto button {
+  background-color: #1A2B3C;
+  ;
+  /* Azul reactivo */
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.3s, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.acciones-contacto button:hover {
+  background-color: #0056b3;
+  transform: scale(1.02);
+}
+
+.acciones-contacto .mensaje-oculto {
+  display: none;
+  font-size: 15px;
+  color: #28a745;
+  /* verde éxito */
+  background-color: #eafaf1;
+  border: 1px solid #c3e6cb;
+  padding: 10px 15px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.acciones-contacto .mensaje-visible {
+  display: block;
+  animation: aparecer 0.5s ease;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/*******************************************************************         Diseño span bonito */
+/* Contenedor padre que posiciona el mensaje */
+
+/* Oculto */
+.mensaje-oculto {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Visible y flotante */
+.mensaje-visible {
+  position: fixed;
+  /* Hace que floten */
+  top: 20px;
+  /* Ajusta según gusto */
+  right: 20px;
+  /* Ajusta según gusto */
+  z-index: 9999;
+  /* Siempre encima */
+  display: flex;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 300px;
+  /* Para que no sean muy anchos */
+  animation: aparecer 0.5s ease;
+  background-color: white;
+  /* Para evitar transparencia molesta */
+}
+
+/* Mensaje de éxito */
+.acciones-contacto .mensaje-visible:not(.error-mensaje) {
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+}
+
+.acciones-contacto .mensaje-visible:not(.error-mensaje) i {
+  font-size: 20px;
+  color: #28a745;
+}
+
+/* Mensaje de error */
+.acciones-contacto .error-mensaje.mensaje-visible {
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.15);
+}
+
+.acciones-contacto .error-mensaje.mensaje-visible i {
+  font-size: 20px;
+  color: #dc3545;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fab,
+.far {
+  padding: 7px 0px 0px 8px;
+}
+
+
+
+
+/* Panel general */
+.admin-panel {
+  background: #ffffff;
+  border: 1px solid #dcdcdc;
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 600px;
+  margin: 40px auto;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+
+
+/* Título del panel */
+.admin-panel h3 {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #2c3e50;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 8px;
+}
+
+/* Formulario */
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Input */
+.admin-input {
+  padding: 12px 14px;
+  font-size: 1rem;
+  border: 1.5px solid #bbb;
+  border-radius: 10px;
+  outline: none;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+}
+
+.admin-input:focus {
+  border-color: #3498db;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+/* Botones en grupo */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* Botón general */
+.admin-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+
+.admin-btn:active {
+  transform: scale(0.98);
+}
+
+
+
+/* Texto informativo */
+.text-muted {
+  display: block;
+  margin-top: 14px;
+  font-size: 0.9rem;
+  color: #444;
+  background-color: #eef6fb;
+  padding: 10px 12px;
+  border-left: 4px solid #3498db;
+  border-radius: 6px;
+  line-height: 1.4;
+}
+
+/* Código ejemplo */
+code {
+  display: inline-block;
+  background-color: #e6eef3;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-family: 'Consolas', 'Courier New', monospace;
+  color: #2c3e50;
+  font-size: 0.9rem;
+  word-break: break-word;
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+
+/* Opcional: para bloques de código más largos */
+pre code {
+  display: block;
+  padding: 12px;
+  font-size: 0.85rem;
+  white-space: pre-wrap;
+  overflow-x: auto;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Botón eliminar específico para limpiar campo */
+.delete-btn-limpiar-campo {
+  background-color: #e74c3c;
+}
+
+.delete-btn-limpiar-campo:hover {
+  background-color: #c0392b;
+}
+
+
+.delete-btn-limpiar-campo {
+  position: relative;
+  background-color: #ffffff;
+  color: #2c3e50;
+  border: 1.5px solid #2c3e50;
+  padding: 9px 20px;
+  font-size: 1.05rem;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  z-index: 1;
+  margin-right: 4px;
+}
+
+.delete-btn-limpiar-campo:hover {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent 50%, rgba(44, 62, 80, 0.03) 50%);
+  background-size: 250% 250%;
+  background-position: right bottom;
+  transition: all 0.5s ease;
+  z-index: -1;
+  opacity: 0;
+}
+
+.delete-btn-limpiar-campo:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 6px rgba(192, 57, 43, 0.4);
+}
+
+
+
+
+
+/***********************************************************************/
+/********************** foother administrativo *************************/
+/***********************************************************************/
+.admin-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.admin-header {
+  color: #2c3e50;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.form-group {
+  background: #f9fafb;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #eaeef2;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+label {
+  color: #4a5568;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.8rem 1.2rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus {
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+  outline: none;
+}
+
+.dynamic-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.input-row {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.icon-btn {
+  padding: 0.6rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.icon-btn.success {
+  background: #48bb78;
+  color: white;
+}
+
+.icon-btn.danger {
+  background: #f56565;
+  color: white;
+}
+
+.icon-btn:hover {
+  transform: translateY(-1px);
+}
+
+.primary-btn {
+  background: #4299e1;
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 1rem;
+  transition: background 0.3s ease;
+  width: 100%;
+  justify-content: center;
+}
+
+.primary-btn:hover {
+  background: #3182ce;
+}
+
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.icon-social {
+  position: absolute;
+  left: 12px;
+  color: #718096;
+  font-size: 1.1rem;
+}
+
+.input-group input {
+  padding-left: 40px !important;
+}
+
+@media (max-width: 768px) {
+  .admin-container {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  .social-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+/*-----------------*/
+.salir_Admin {
+  display: flex;
+  justify-content: flex-end;
+  /* Alinear a la derecha */
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  /* fondo neutro */
+}
+
+.btn-salir {
+  background-color: #004085;
+  /* azul oscuro, buen contraste para daltónicos */
+  color: #ffffff;
+  border: 2px solid #003366;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  font-weight: 600;
+  user-select: none;
+}
+
+.btn-salir:hover,
+.btn-salir:focus {
+  background-color: #002752;
+  border-color: #001f3f;
+  outline: none;
+}
+
+/* Para accesibilidad */
+.btn-salir:focus-visible {
+  outline: 3px solid #ffbf47;
+  /* amarillo para foco accesible */
+  outline-offset: 2px;
+}

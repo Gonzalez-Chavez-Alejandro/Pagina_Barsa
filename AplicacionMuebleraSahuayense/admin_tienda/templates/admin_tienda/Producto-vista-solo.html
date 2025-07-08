@@ -1,0 +1,117 @@
+{% load static %}
+<script src="{% static 'js/Header.js' %}"></script>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Detalle Producto</title>
+    <link rel="icon" href="https://res.cloudinary.com/dacrpsl5p/image/upload/v1745430696/Logo-Negro-B_c6wznv.png"
+        type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="{% static 'Css/Principal.css' %}">
+    <link rel="stylesheet" href="{% static 'Css/Carrito.css' %}">
+    <link rel="stylesheet" href="{% static 'Css/Header.css' %}">
+    <link rel="stylesheet" href="{% static 'Css/Producto-vista-solo.css' %}">
+    <link rel="stylesheet" href="{% static 'Css/foother.css' %}">
+    
+</head>
+
+<body>
+    {% include 'includes/header.html' %}
+    {% include 'includes/spinner.html' %}
+
+    <div class="contenedor-detalle">
+        <div class="galeria">
+            <div class="zoom-container">
+                <img id="imagen-grande" src="" alt="Imagen principal del producto">
+                <div id="zoom-lens"></div>
+            </div>
+            <div class="miniaturas"></div>
+        </div>
+
+        <div class="info-producto">
+            <h1 id="detalle-nombre"></h1>
+            <p id="detalle-descripcion" style="text-align: justify;"></p>
+
+            <div class="precios">
+                <span id="detalle-precio" class="precio-oferta"></span>
+                <span id="detalle-precio-original" class="precio-original"></span>
+                <span id="detalle-porcentaje" class="ahorro"></span>
+            </div>
+
+            <p id="detalle-ahorro" class="ahorro"></p>
+
+            <button id="agregar-carrito-detalle" class="boton-compra">
+                <img src="https://res.cloudinary.com/dacrpsl5p/image/upload/v1745430694/Carrito_rdywow.png"
+                    alt="Carrito" class="icono-carrito-svg">
+                <span id="agregar-carrito-detalle-span">Agregar al carrito</span>
+            </button>
+
+
+        </div>
+    </div>
+<style>.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 3rem;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+  padding: 0 15px;
+}
+
+.left-btn {
+  left: 10px;
+}
+
+.right-btn {
+  right: 10px;
+}
+
+@media (max-width: 768px) {
+  .nav-btn {
+    font-size: 2rem;
+    color: #ffd700; /* dorado o cualquier otro color */
+    background: rgba(0, 0, 0, 0.5);
+    padding: 8px 12px;
+  }
+}
+</style>
+    <!-- Categorías Similares -->
+    <div id="categorias-similares" class="contenedor-categorias-similares">
+        <h2>Categorías similares</h2>
+        <div id="lista-categorias-similares" class="categorias-grid"></div>
+    </div>
+
+    <!-- Modal de imagen en pantalla completa -->
+    <div id="modalImagen" class="modal-imagen">
+    <span class="cerrar-modal" onclick="cerrarModalImagen()">&times;</span>
+
+    <!-- Botones anterior/siguiente -->
+    <button id="prev-img" class="nav-btn left-btn">⟨</button>
+    <img id="imagenModalContenido" src="" alt="Vista ampliada">
+    <button id="next-img" class="nav-btn right-btn">⟩</button>
+</div>
+
+ 
+    {% include 'includes/carrito.html' %}
+    {% include 'includes/foother.html' %}
+    {% include 'includes/toast.html' %}
+    <script src="{% static 'js/Header.js' %}"></script>
+    <script src="{% static 'js/Admin-mostrarToast.js' %}"></script>
+    <script src="{% static 'js/Producto-vista-solo.js' %}"></script>
+    <script src="{% static 'js/Admin-Manda.js' %}"></script>
+    <script src="{% static 'js/Carrito.js' %}"></script>
+    
+<script src="{% static 'js/Header.js' %}"></script>
+
+
+</body>
+
+</html>
